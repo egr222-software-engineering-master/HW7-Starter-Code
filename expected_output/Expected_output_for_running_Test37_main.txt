@@ -18,7 +18,7 @@ time 12 sample = 116.5
 Plucking string '2'
 time 13 sample = 136.5
 time 14 sample = 116.5
-time 15 sample = 96.5a
+time 15 sample = 96.5
 time 16 sample = 86.25
 making an extra call on tic
 
