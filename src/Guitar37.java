@@ -12,14 +12,14 @@ public class Guitar37 implements Guitar {
         "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";  // keyboard layout
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     public Guitar37(boolean useKP){
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
@@ -27,7 +27,7 @@ public class Guitar37 implements Guitar {
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
@@ -36,7 +36,7 @@ public class Guitar37 implements Guitar {
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
@@ -44,14 +44,14 @@ public class Guitar37 implements Guitar {
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
     public double sample() { return -1; }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
@@ -59,7 +59,7 @@ public class Guitar37 implements Guitar {
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override

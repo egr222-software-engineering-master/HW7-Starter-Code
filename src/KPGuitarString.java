@@ -11,21 +11,21 @@ public class KPGuitarString implements GuitarString{
     public static final double ENERGY_DECAY_FACTOR = 0.996;
 
     /**
-     * Constructor: Implement your code here
+     * TODO: Constructor: Implement your code here
      * change comments
      */
     public KPGuitarString(double frequency){
     }
 
     /**
-     * Constructor: Implement your code here
+     * TODO: Constructor: Implement your code here
      * change comments
      */
     public KPGuitarString(double[] init){
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
@@ -33,7 +33,7 @@ public class KPGuitarString implements GuitarString{
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
@@ -41,7 +41,7 @@ public class KPGuitarString implements GuitarString{
     }
 
     /**
-     * Implement your code here
+     * TODO: Implement your code here
      * Change comments
      */
     @Override
