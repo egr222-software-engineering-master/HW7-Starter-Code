@@ -60,11 +60,13 @@ public class TestString {
     //       buffer size to test
     // post: program is halted if an error is encountered
     public static void testWithFrequency(Scanner input) {
+        ArrayList<String> output = new ArrayList<>(); // collects strings written to System.out for error output
         int cases = input.nextInt();
         for (int i = 0; i < cases; i++) {
             int freq = input.nextInt();
             int size = input.nextInt();
-            System.out.println("Testing KPGuitarString with frequency " + freq);
+            output.add("Testing KPGuitarString with frequency " + freq);
+            System.out.println(output.get(output.size()-1));
             GuitarString g = new KPGuitarString(freq);
             g.pluck();
             double sum1 = 0.0;
@@ -77,13 +79,15 @@ public class TestString {
                     allZero = false;
                 }
                 if (n < -0.5 || n > 0.5) {
-                    System.out.println("ERROR: sample #" + j + " = " + n);
+                    printErrorOutput(output);
+                    System.err.println("ERROR: sample #" + j + " = " + n);
                     System.exit(1);
                 }
                 g.tic();
             }
             if (allZero) {
-                System.out.println("ERROR: all samples values are zero");
+                printErrorOutput(output);
+                System.err.println("ERROR: all samples values are zero");
                 System.exit(1);
             }
             double last = g.sample();
@@ -96,12 +100,23 @@ public class TestString {
             }
             double correctSum = (sum1 - first / 2.0 - last / 2.0) * 0.996;
             if (Math.abs(sum2 - correctSum) > EPSILON) {
-                System.out.println("ERROR: sum of samples is not correct");
-                System.out.println("ring buffer size should = " + size);
+                printErrorOutput(output);
+                System.err.println("ERROR: sum of samples is not correct");
+                System.err.println("   ring buffer size should = " + size);
+                System.err.println("   check that the KPGuitarString frequency constructor is setting the buffer size correctly");
                 System.exit(1);
-            } else
-                System.out.println("passed");
+            } else {
+                output.add("passed");
+                System.out.println(output.get(output.size()-1));
+            }
+            output.add("");
             System.out.println();
+        }
+    }
+
+    private static void printErrorOutput(ArrayList<String> output) {
+        for(String line : output) {
+            System.err.println(line);
         }
     }
 }

@@ -7,7 +7,7 @@ import java.util.*;
  * @Date
  */
 public class KPGuitarString implements GuitarString{
-    private Queue<Double> ringBuffer;
+    protected Queue<Double> ringBuffer;
     public static final double ENERGY_DECAY_FACTOR = 0.996;
 
     /**
