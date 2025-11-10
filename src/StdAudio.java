@@ -10,9 +10,15 @@
  *    - Does not seem to work properly when reading .wav files from a .jar file.
  *    - Assumes the audio is monaural, with sampling rate of 44,100.
  *
+ *  History
+ *  -------
+ *    - Update by Larry Clement to remove deprecation warnings related to java.applet.AudioClip
+ *    - 2025-11-10: fixed play() and loop() methods to properly handle exceptions
+ *
  *************************************************************************/
 
-import java.applet.*;
+//import java.applet.*;
+import javax.sound.sampled.*;
 import java.io.*;
 import java.net.*;
 import javax.sound.sampled.*;
@@ -131,37 +137,42 @@ public final class StdAudio {
 
 
 
-
     /**
      * Play a sound file (in .wav or .au format) in a background thread.
      */
     public static void play(String filename) {
-        URL url = null;
         try {
-            File file = new File(filename);
-            if (file.canRead()) url = file.toURI().toURL();
+            File soundFile = new File(filename);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
         }
-        catch (MalformedURLException e) { e.printStackTrace(); }
-        // URL url = StdAudio.class.getResource(filename);
-        if (url == null) throw new RuntimeException("audio " + filename + " not found");
-        AudioClip clip = Applet.newAudioClip(url);
-        clip.play();
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) { e.printStackTrace(); }
     }
 
     /**
      * Loop a sound file (in .wav or .au format) in a background thread.
      */
     public static void loop(String filename) {
-        URL url = null;
         try {
-            File file = new File(filename);
-            if (file.canRead()) url = file.toURI().toURL();
+            File soundFile = new File(filename);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+            // Keep the main thread alive to allow the audio to play
+            // In a GUI application, this would be handled by the event dispatch thread.
+            // For a simple console application, you might use Thread.sleep() or
+            // a mechanism to wait for user input to stop the audio.
+            Thread.sleep(10000); // Example: play for 10 seconds
+
+            clip.stop();
+            clip.close();
+            audioInputStream.close();
         }
-        catch (MalformedURLException e) { e.printStackTrace(); }
-        // URL url = StdAudio.class.getResource(filename);
-        if (url == null) throw new RuntimeException("audio " + filename + " not found");
-        AudioClip clip = Applet.newAudioClip(url);
-        clip.loop();
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) { e.printStackTrace(); }
     }
 
 
